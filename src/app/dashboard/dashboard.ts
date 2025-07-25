@@ -10,7 +10,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NgxChartsModule, StatWidget, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, NgxChartsModule, StatWidget],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })

@@ -6,7 +6,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, Dashboard, Sidebar, NgxChartsModule],
+  imports: [RouterOutlet, Sidebar, NgxChartsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
