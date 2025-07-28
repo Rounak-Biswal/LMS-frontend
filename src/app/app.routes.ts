@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
 import { Dashboard } from './dashboard/dashboard';
-import { Leaves } from './leaves/leaves';
-import { Extra } from './extra/extra';
 import { MyLeaves } from './my-leaves/my-leaves';
 import { NewLeave } from './new-leave/new-leave';
+import { Admin } from './admin/admin';
 
 export const routes: Routes = [
     {
@@ -22,5 +21,9 @@ export const routes: Routes = [
     {
         path: "apply",
         component: NewLeave
+    },
+    {
+        path: "admin",
+        component: Admin
     }
 ];

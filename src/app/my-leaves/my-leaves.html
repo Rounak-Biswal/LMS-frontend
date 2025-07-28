@@ -1,15 +1,15 @@
 <!-- display all leaves -->
-<div class="overflow-x-auto bg-white rounded-xl shadow">
+<div class="w-75 p-3 bg-white rounded-xl shadow">
     <table class="min-w-full text-sm text-left">
-        <thead class="bg-gray-100 text-gray-700" style="color: #00324d;">
+        <thead class="bg-gray-100 text-gray-700 text-center" style="color: #00324d;">
             <tr>
                 <th class="px-4 py-3">Leave type</th>
                 <th class="px-4 py-3">From</th>
                 <th class="px-4 py-3">To</th>
                 <th class="px-4 py-3">Days</th>
                 <th class="px-4 py-3">Status</th>
-                <th class="px-4 py-3">Reason</th>
-                <th class="px-4 py-3 text-center" style="min-width: 120px;">Action</th>
+                <!-- <th class="px-4 py-3">Reason</th> -->
+                <th class="px-4 py-3 text-center" style="min-width: 120px;">Actions</th>
 
             </tr>
         </thead>
@@ -24,7 +24,7 @@
                 <td class="px-4 py-3">
                     <span [ngClass]="getStatusClassName(leave.status)">{{ leave.status }}</span>
                 </td>
-                <td class="px-4 py-3">{{ leave.reason }}</td>
+                <!-- <td class="px-4 py-3">{{ leave.reason }}</td> -->
 
 
                 <td class="px-4 py-3">
@@ -73,7 +73,7 @@
 <div
     class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center z-3">
 
-    <div class="bg-white rounded-4 shadow p-4 w-75 position-relative">
+    <div class="bg-white rounded-4 shadow p-4 w-50 position-relative">
 
 
         <button type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"
@@ -94,11 +94,11 @@
             </div>
             <div class="col-md-6 mb-2">
                 <strong>From Date:</strong>
-                {{ currLeave.from_date }}
+                {{ currLeave.from_date | date:'dd MMM yyyy' }}
             </div>
             <div class="col-md-6 mb-2">
                 <strong>To Date:</strong>
-                {{ currLeave.to_date }}
+                {{ currLeave.to_date | date:'dd MMM yyyy' }}
             </div>
             <div class="col-md-6 mb-2">
                 <strong>Number of Days:</strong>

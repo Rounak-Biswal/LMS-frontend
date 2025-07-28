@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import { Dashboard } from './dashboard/dashboard';
+import { Router } from '@angular/router';
 import { Sidebar } from './sidebar/sidebar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -12,4 +12,5 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 })
 export class App {
   protected readonly title = signal('LMS');
+  constructor(public router: Router) {}
 }
