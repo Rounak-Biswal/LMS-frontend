@@ -7,3 +7,7 @@ export interface ILeave {
     status: string,
     reason: string
 }
+
+export interface ILeaveWithDaysLeft extends ILeave{
+    daysLeft: number
+}

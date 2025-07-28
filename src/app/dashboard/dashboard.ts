@@ -1,18 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-// import widgetsData from './data/widgets.json';
-// import leaveStats from './data/leave_stats.json';
 import { StatWidget } from '../stat-widget/stat-widget';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ILeave } from '../../models/Leave.model';
+import { ILeave, ILeaveWithDaysLeft } from '../../models/Leave.model';
+import { Reminder } from '../reminder/reminder';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NgxChartsModule, StatWidget, HttpClientModule],
+  imports: [CommonModule, NgxChartsModule, StatWidget, HttpClientModule, Reminder],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
@@ -21,6 +20,8 @@ export class Dashboard implements OnInit {
 
   widgets: any[] = [];
   chartData: any[] = [];
+
+  allLeaveData: ILeave[] = []
 
   //widgets data
   allLeaveDataForWidgets: ILeave[] = []
@@ -37,6 +38,8 @@ export class Dashboard implements OnInit {
   unpaids: number = 0
   compensatories: number = 0
 
+  //reminder data
+  reminders: ILeaveWithDaysLeft[] = []
 
   view: [number, number] = [600, 300];
 
@@ -58,8 +61,17 @@ export class Dashboard implements OnInit {
   };
 
   ngOnInit(): void {
+    this.getAllData()
     this.getLeaveSummary()
     this.getChartSummary()
+  }
+
+  getAllData() {
+    this.http.get("http://127.0.0.1:8000/leave/all")
+      .subscribe((res: any) => {
+        this.allLeaveData = res;
+        this.getReminders()
+      })
   }
 
   getLeaveSummary() {
@@ -102,5 +114,23 @@ export class Dashboard implements OnInit {
           { "name": "Compensatory", "value": this.compensatories }
         ]
       })
+  }
+
+  getReminders() {
+    const currDate = new Date()
+    this.reminders = this.allLeaveData
+      .filter((leave) => {
+        const endDate = new Date(leave.to_date)
+        const diff = endDate.getTime() - currDate.getTime()
+        const diffDays = diff / (1000 * 60 * 60 * 24)
+
+        return diffDays >= 0 && diffDays <= 3
+      })
+      .map((leave) => ({
+        ...leave,
+        daysLeft: Math.ceil((new Date(leave.to_date).getTime() - Date.now()) / (1000 * 3600 * 24))
+      }))
+
+    console.log("Reminders : ", this.reminders)
   }
 }

@@ -12,6 +12,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class NewLeave implements OnInit {
   http = inject(HttpClient)
+
   newLeave = {
     type: "",
     from_date: "",
