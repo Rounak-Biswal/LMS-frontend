@@ -4,10 +4,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ILeave } from '../../models/Leave.model';
 import { RouterLink } from "@angular/router";
 import { ShowAllLeaves } from "../show-all-leaves/show-all-leaves";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-my-leaves',
-  imports: [HttpClientModule, DatePipe, CommonModule, RouterLink, ShowAllLeaves],
+  imports: [HttpClientModule, DatePipe, CommonModule, RouterLink, ShowAllLeaves, FormsModule],
   templateUrl: './my-leaves.html',
   styleUrl: './my-leaves.css'
 })
@@ -20,6 +21,9 @@ export class MyLeaves implements OnInit {
 
   //delete confirmation
   dltConfirm: ILeave | null = null
+
+  //edit form
+  editLeave: ILeave | null = null
 
   // Pagination variables
   paginatedLeaves: ILeave[] = []
@@ -57,6 +61,26 @@ export class MyLeaves implements OnInit {
         this.closeBtn()
       })
   }
+
+  updateLeave(id: string) {
+    if (this.editLeave) {
+      let from = new Date(this.editLeave.from_date)
+      let to = new Date(this.editLeave.to_date)
+      //invalid date validation
+      if (to < from) {
+        alert("❗ Invalid date range.\nPlease ensure 'To Date' is not earlier than 'From Date'.");
+
+        return;
+      }
+      let days = to.getTime() - from.getTime()    //return milliseconds
+      this.editLeave.days = (days / (1000 * 60 * 60 * 24)) + 1   //convert ms -> day
+    }
+    this.http.put(`http://127.0.0.1:8000/leave/${id}/update`, this.editLeave)
+      .subscribe((res: any) => {
+        this.getLeaves()
+        this.closeBtn()
+      })
+  }
   //-------------------------------------
 
   //change "status" bg color
@@ -89,6 +113,7 @@ export class MyLeaves implements OnInit {
   closeBtn() {
     this.currLeave = null;
     this.dltConfirm = null;
+    this.editLeave = null
   }
 
   //modal delete confirmation
@@ -96,6 +121,25 @@ export class MyLeaves implements OnInit {
     this.http.get(`http://127.0.0.1:8000/leave/${id}`)
       .subscribe((res: any) => {
         this.dltConfirm = res;
+      })
+  }
+
+  //modal edit form
+  showEditForm(id: string) {
+    this.http.get(`http://127.0.0.1:8000/leave/${id}`)
+      .subscribe((res: any) => {
+        const formatDate = (dateStr: string) => {
+          const d = new Date(dateStr);
+          const year = d.getFullYear();
+          const month = String(d.getMonth() + 1).padStart(2, '0');
+          const day = String(d.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        };
+
+        res.from_date = formatDate(res.from_date);
+        res.to_date = formatDate(res.to_date);
+        this.editLeave = res;
+        console.log(this.editLeave)
       })
   }
 }
