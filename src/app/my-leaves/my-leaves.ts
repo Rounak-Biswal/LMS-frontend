@@ -8,7 +8,7 @@ import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-my-leaves',
-  imports: [HttpClientModule, DatePipe, CommonModule, RouterLink, ShowAllLeaves, FormsModule],
+  imports: [HttpClientModule, DatePipe, CommonModule, FormsModule],
   templateUrl: './my-leaves.html',
   styleUrl: './my-leaves.css'
 })
