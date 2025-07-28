@@ -21,3 +21,7 @@ export interface LeaveForm {
   status: string;
   [key: string]: any; 
 }
+
+export interface IEditLeaveForm extends ILeave{
+  [key: string]: any;
+}

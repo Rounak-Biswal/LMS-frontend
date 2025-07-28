@@ -1,10 +1,9 @@
 import { CommonModule, DatePipe } from "@angular/common"
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { ILeave } from '../../models/Leave.model';
-import { RouterLink } from "@angular/router";
-import { ShowAllLeaves } from "../show-all-leaves/show-all-leaves";
+import { IEditLeaveForm, ILeave } from '../../models/Leave.model';
 import { FormsModule } from "@angular/forms";
+import { EDIT_LEAVE_FORM_CONFIG } from './edit-leave-form.config';
 
 @Component({
   selector: 'app-my-leaves',
@@ -23,7 +22,8 @@ export class MyLeaves implements OnInit {
   dltConfirm: ILeave | null = null
 
   //edit form
-  editLeave: ILeave | null = null
+  formConfig = EDIT_LEAVE_FORM_CONFIG;
+  editLeave: IEditLeaveForm | null = null
 
   // Pagination variables
   paginatedLeaves: ILeave[] = []
