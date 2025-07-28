@@ -1,5 +1,5 @@
 <!-- display all leaves -->
-<div class="w-75 p-3 bg-white rounded-xl shadow">
+<div class="w-full p-3 bg-white rounded-xl shadow">
     <table class="min-w-full text-sm text-left">
         <thead class="bg-gray-100 text-gray-700 text-center" style="color: #00324d;">
             <tr>
@@ -47,20 +47,16 @@
         </tbody>
     </table>
 
-    <div class="d-flex justify-content-end mt-4 w-full">
-        <button class="px-3 py-1 border-0 bg-white" (click)="changePage(currentPage - 1)"
+    <!-- pagination -->
+    <div class="d-flex justify-content-end align-items-center gap-2 mt-4 w-full">
+        <button class="py-1 px-2 border-0 bg-white" (click)="changePage(currentPage - 1)"
             [disabled]="currentPage === 1">
             <i class="fa-solid fa-angle-left"></i>
         </button>
 
-        @for(page of [].constructor(totalPages); let i = $index; track $index) {
-        <button class="px-3 py-1 border-0 bg-white" [ngClass]="{'bg-blue-500 text-white': currentPage === i + 1,
-                            'bg-gray-100': currentPage !== i + 1}" (click)="changePage(i + 1)">
-            {{ i + 1 }}
-        </button>
-        }
+        <span>{{ currentPage }}</span>
 
-        <button class="px-3 py-1 border-0 bg-white" (click)="changePage(currentPage + 1)"
+        <button class="py-1 px-2 border-0 bg-white" (click)="changePage(currentPage + 1)"
             [disabled]="currentPage === totalPages">
             <i class="fa-solid fa-angle-right"></i>
         </button>

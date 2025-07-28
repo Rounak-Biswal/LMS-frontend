@@ -27,7 +27,7 @@ export class MyLeaves implements OnInit {
 
   // Pagination variables
   paginatedLeaves: ILeave[] = []
-  itemsPerPage = 9
+  itemsPerPage = 6
   currentPage = 1
   totalPages = 1
   //----------------------

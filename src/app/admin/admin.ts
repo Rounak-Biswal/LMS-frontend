@@ -25,7 +25,7 @@ export class Admin implements OnInit {
 
   // Pagination variables
   paginatedLeaves: ILeave[] = []
-  itemsPerPage = 9
+  itemsPerPage = 4
   currentPage = 1
   totalPages = 1
 

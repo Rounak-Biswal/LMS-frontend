@@ -1,15 +1,15 @@
 <div class="d-flex align-items-center mb-3 w-75 mx-auto">
-  <h4 class="fw-bold mb-0 mx-auto" style="color: #00324d;">Admin Panel</h4>
+    <h4 class="fw-bold mb-0 mx-auto" style="color: #00324d;">Admin Panel</h4>
 
-  <select class="form-select w-auto" [(ngModel)]="selectedStatus" (change)="filterByStatus()">
-    <option value="All">All</option>
-    <option value="Pending">Pending</option>
-    <option value="Approved">Approved</option>
-    <option value="Rejected">Rejected</option>
-  </select>
+    <select class="form-select w-auto" [(ngModel)]="selectedStatus" (change)="filterByStatus()">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+    </select>
 </div>
 
-<div class="w-75 bg-white rounded-xl shadow mx-auto p-3">
+<div class="w-100 bg-white rounded-xl shadow mx-auto p-3">
     <table class="min-w-full text-sm text-left">
         <thead class="bg-gray-100 text-gray-700" style="color: #00324d;">
             <tr>
@@ -53,23 +53,20 @@
         </tbody>
     </table>
 
-    <div class="d-flex justify-content-end mt-4 w-full">
-        <button class="py-1 border-0 bg-white" (click)="changePage(currentPage - 1)"
+    <!-- pagination -->
+    <div class="d-flex justify-content-end align-items-center gap-2 mt-4 w-full">
+        <button class="py-1 px-2 border-0 bg-white" (click)="changePage(currentPage - 1)"
             [disabled]="currentPage === 1">
             <i class="fa-solid fa-angle-left"></i>
         </button>
 
-        @for(page of [].constructor(totalPages); let i = $index; track $index) {
-        <button class="py-1 border-0 bg-white" [ngClass]="{'bg-blue-500 text-white': currentPage === i + 1,
-                            'bg-gray-100': currentPage !== i + 1}" (click)="changePage(i + 1)">
-            {{ i + 1 }}
-        </button>
-        }
+        <span>{{ currentPage }}</span>
 
-        <button class="py-1 border-0 bg-white" (click)="changePage(currentPage + 1)"
+        <button class="py-1 px-2 border-0 bg-white" (click)="changePage(currentPage + 1)"
             [disabled]="currentPage === totalPages">
             <i class="fa-solid fa-angle-right"></i>
         </button>
     </div>
+
 
 </div>

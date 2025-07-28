@@ -79,9 +79,9 @@ export class Dashboard implements OnInit {
       .subscribe((res: any) => {
         this.allLeaveDataForWidgets = res
 
-        this.approvedLeaves = this.allLeaveDataForWidgets.filter((leave) => leave.status === "Approved").length
-        this.rejectedLeaves = this.allLeaveDataForWidgets.filter((leave) => leave.status === "Rejected").length
-        this.pendingLeaves = this.allLeaveDataForWidgets.filter((leave) => leave.status === "Pending").length
+        this.approvedLeaves = this.allLeaveDataForWidgets ? this.allLeaveDataForWidgets.filter((leave) => leave.status === "Approved").length : 0
+        this.rejectedLeaves = this.allLeaveDataForWidgets ? this.allLeaveDataForWidgets.filter((leave) => leave.status === "Rejected").length : 0
+        this.pendingLeaves = this.allLeaveDataForWidgets ? this.allLeaveDataForWidgets.filter((leave) => leave.status === "Pending").length : 0
 
         this.widgets = [
           { count: this.approvedLeaves, label: 'Approved Leaves', bg: 'bg-success-subtle' },
