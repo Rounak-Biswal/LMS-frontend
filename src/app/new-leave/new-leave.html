@@ -1,7 +1,7 @@
 <div class="bg-white rounded-4 shadow w-75 position-relative">
     <h4 class="mb-4 py-3 px-4 rounded-top-4" style="background-color: #00324d; color: white;">Apply for New Leave</h4>
 
-    <form (ngSubmit)="applyLeave()" class="p-4">
+    <!-- <form (ngSubmit)="applyLeave()" class="p-4">
         <div class="mb-3">
             <label for="type" class="form-label">Leave Type</label>
             <select class="form-select" [(ngModel)]="newLeave.type" id="type" name="type">
@@ -39,5 +39,37 @@
             </button>
         </div>
 
+    </form> -->
+    <form (ngSubmit)="applyLeave()" class="p-4">
+        @for(field of formConfig; track $index) {
+        <div class="mb-3" *ngIf="field.type !== 'hidden'">
+
+            <label [for]="field.name" class="form-label">{{ field.label }}</label>
+
+            <!-- Select -->
+            <select *ngIf="field.type === 'select'" class="form-select" [(ngModel)]="newLeave[field.name]"
+                [id]="field.name" [name]="field.name">
+                <option value="" disabled selected>{{ field.placeholder }}</option>
+                @for(option of field.options; track $index) {
+                <option [value]="option">{{ option }}</option>
+                }
+            </select>
+
+            <!-- Date -->
+            <input *ngIf="field.type === 'date'" type="date" class="form-control" [(ngModel)]="newLeave[field.name]"
+                [id]="field.name" [name]="field.name" [min]="field.name === 'to_date' ? newLeave['from_date'] : null">
+
+            <!-- Textarea -->
+            <textarea *ngIf="field.type === 'textarea'" class="form-control" [(ngModel)]="newLeave[field.name]"
+                [id]="field.name" [name]="field.name" [rows]="field.rows || 3"></textarea>
+        </div>
+        }
+
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn text-white" style="background-color: #00324d;">
+                Submit
+            </button>
+        </div>
     </form>
+
 </div>

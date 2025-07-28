@@ -1,26 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ILeave } from '../../models/Leave.model';
+import { ILeave, LeaveForm } from '../../models/Leave.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LEAVE_FORM_CONFIG } from './leave-form.config';
 
 @Component({
   selector: 'app-new-leave',
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './new-leave.html',
   styleUrl: './new-leave.css'
 })
 export class NewLeave implements OnInit {
   http = inject(HttpClient)
 
-  newLeave = {
-    type: "",
-    from_date: "",
-    to_date: "",
-    reason: "",
-    days: 0,
-    status: "Pending"
-  };
+  formConfig = LEAVE_FORM_CONFIG;
+
+  newLeave: LeaveForm = {
+  type: "",
+  from_date: "",
+  to_date: "",
+  reason: "",
+  days: 0,
+  status: "Pending"
+};
+
 
   ngOnInit(): void {
 

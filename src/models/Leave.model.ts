@@ -11,3 +11,13 @@ export interface ILeave {
 export interface ILeaveWithDaysLeft extends ILeave{
     daysLeft: number
 }
+
+export interface LeaveForm {
+  type: string;
+  from_date: string;
+  to_date: string;
+  reason: string;
+  days: number;
+  status: string;
+  [key: string]: any; 
+}
