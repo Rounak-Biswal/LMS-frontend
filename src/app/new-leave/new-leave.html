@@ -1,7 +1,7 @@
-<div class="bg-white rounded-4 shadow p-4 w-75 position-relative">
-    <h4 class="mb-4" style="color: #00324d;">Apply for New Leave</h4>
+<div class="bg-white rounded-4 shadow w-75 position-relative">
+    <h4 class="mb-4 py-3 px-4 rounded-top-4" style="background-color: #00324d; color: white;">Apply for New Leave</h4>
 
-    <form (ngSubmit)="applyLeave()">
+    <form (ngSubmit)="applyLeave()" class="p-4">
         <div class="mb-3">
             <label for="type" class="form-label">Leave Type</label>
             <select class="form-select" [(ngModel)]="newLeave.type" id="type" name="type">
@@ -23,7 +23,8 @@
 
             <div class="mb-3 col-md-6">
                 <label for="to" class="form-label">To Date</label>
-                <input type="date" id="to" class="form-control" [(ngModel)]="newLeave.to_date" name="to_date" [min]="newLeave.from_date">
+                <input type="date" id="to" class="form-control" [(ngModel)]="newLeave.to_date" name="to_date"
+                    [min]="newLeave.from_date">
             </div>
         </div>
 

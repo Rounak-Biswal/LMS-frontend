@@ -73,17 +73,18 @@
 <div
     class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center z-3">
 
-    <div class="bg-white rounded-4 shadow p-4 w-50 position-relative">
+    <div class="bg-white rounded-4 shadow w-50 position-relative">
 
 
-        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" aria-label="Close"
             (click)="closeBtn()"></button>
 
 
-        <h4 class="mb-4" style="color: #00324d;">Leave Application Details</h4>
+        <h4 class="mb-4 py-3 px-4 rounded-top-4" style="background-color: #00324d; color: white;">Leave Application
+            Details</h4>
 
 
-        <div class="row mb-2">
+        <div class="row mb-2 p-4">
             <div class="col-md-6 mb-2">
                 <strong>Leave Type:</strong>
                 {{ currLeave.type }}
@@ -119,7 +120,7 @@
 <div
     class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center z-3">
 
-    <div class="bg-white rounded-4 shadow p-4 w-25 position-relative">
+    <div class="bg-white rounded-4 shadow py-3 px-4 w-25 position-relative">
 
 
         <button type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"
@@ -130,7 +131,7 @@
                 <strong>Are you sure about that ?</strong>
             </div>
         </div>
-        <div class="row mb-2 col-8">
+        <div class="row mb-0 col-8">
             <div class="d-flex justify-content-between gap-5 mb-2">
                 <button class="btn text-white" style="background-color: #00324d;"
                     (click)="deleteLeave(dltConfirm.id)">Confirm</button>
@@ -146,13 +147,13 @@
 <div
     class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center z-3">
 
-    <div class="bg-white rounded-4 shadow p-4 w-75 position-relative">
-        <h4 class="mb-4" style="color: #00324d;">Edit Leave</h4>
+    <div class="bg-white rounded-4 shadow w-75 position-relative">
+        <h4 class="mb-4 py-3 px-4 rounded-top-4" style="background-color: #00324d; color: white;">Edit Leave</h4>
 
-        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" aria-label="Close"
+        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" aria-label="Close"
             (click)="closeBtn()"></button>
 
-        <form (ngSubmit)="updateLeave(editLeave.id)">
+        <form (ngSubmit)="updateLeave(editLeave.id)" class="p-4">
             <div class="mb-3">
                 <label for="type" class="form-label">Leave Type</label>
                 <select class="form-select" [(ngModel)]="editLeave.type" id="type" name="type">
