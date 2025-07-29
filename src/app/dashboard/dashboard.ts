@@ -120,6 +120,7 @@ export class Dashboard implements OnInit {
     const currDate = new Date()
     this.reminders = this.allLeaveData
       .filter((leave) => {
+        if (leave.status !== "Approved") return false;
         const endDate = new Date(leave.to_date)
         const diff = endDate.getTime() - currDate.getTime()
         const diffDays = diff / (1000 * 60 * 60 * 24)

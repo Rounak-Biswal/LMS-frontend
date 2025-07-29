@@ -1,3 +1,7 @@
+<div *ngIf="successMessage" class="alert alert-success rounded-3 px-4 py-2 mb-3">
+    {{ successMessage }}
+</div>
+
 <div class="bg-white rounded-4 shadow w-75 position-relative">
     <h4 class="mb-4 py-3 px-4 rounded-top-4" style="background-color: #00324d; color: white;">Apply for New Leave</h4>
 
@@ -38,8 +42,8 @@
                 Submit
             </button>
         </div>
+-->
 
-    </form> -->
     <form (ngSubmit)="applyLeave()" class="p-4">
         @for(field of formConfig; track $index) {
         <div class="mb-3" *ngIf="field.type !== 'hidden'">

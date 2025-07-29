@@ -15,6 +15,11 @@ export class MyLeaves implements OnInit {
   http = inject(HttpClient)
   allLeaveData: ILeave[] = []
 
+  //filter
+  selectedStatus: string = "All";
+  filteredLeaves: ILeave[] = [];
+
+
   //view detail
   currLeave: ILeave | null = null
 
@@ -37,14 +42,36 @@ export class MyLeaves implements OnInit {
   }
 
   //api
+  // getLeaves() {
+  //   this.http.get("http://127.0.0.1:8000/leave/all")
+  //     .subscribe((res: any) => {
+  //       this.allLeaveData = res
+  //       this.totalPages = Math.ceil(this.allLeaveData.length / this.itemsPerPage)
+  //       this.updatePaginatedLeaves()
+  //     })
+  // }
+
+  //filter function
   getLeaves() {
-    this.http.get("http://127.0.0.1:8000/leave/all")
-      .subscribe((res: any) => {
-        this.allLeaveData = res
-        this.totalPages = Math.ceil(this.allLeaveData.length / this.itemsPerPage)
-        this.updatePaginatedLeaves()
-      })
+    this.http.get("http://127.0.0.1:8000/leave/all").subscribe((res: any) => {
+      this.allLeaveData = res;
+      this.filterByStatus(); // Apply filtering + pagination
+    });
   }
+
+  filterByStatus() {
+    if (this.selectedStatus === "All") {
+      this.filteredLeaves = [...this.allLeaveData];
+    } else {
+      this.filteredLeaves = this.allLeaveData.filter(leave => leave.status === this.selectedStatus);
+    }
+
+    this.totalPages = Math.ceil(this.filteredLeaves.length / this.itemsPerPage);
+    this.currentPage = 1;
+    this.updatePaginatedLeaves(); // now uses filtered data
+  }
+
+  //------------------------  
 
   id: string = "688540c565661e8177eec4ac"
   showLeave(id: string) {
@@ -96,10 +123,11 @@ export class MyLeaves implements OnInit {
 
   //pagination
   updatePaginatedLeaves() {
-    const start = (this.currentPage - 1) * this.itemsPerPage
-    const end = start + this.itemsPerPage
-    this.paginatedLeaves = this.allLeaveData.slice(start, end)
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedLeaves = this.filteredLeaves.slice(start, end);
   }
+
 
   changePage(page: number) {
     if (page >= 1 && page <= this.totalPages) {
